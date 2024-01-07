@@ -8,9 +8,7 @@ def cart_display():
             quantity_index = ITEM_LIST.index(item)
 
             print(f"£ {price:6.2f} \t {item:40} \t Quantity: "
-                  f"{item_quantity[quantity_index]}")
-
-            
+                  f"{item_quantity[quantity_index]}")          
     print(LINE)
 
 # Function to display numbered item list
@@ -18,6 +16,16 @@ def item_menu():
     for num, name in enumerate(ITEM_LIST, start=1):
        print(f"{num}:  {name}")
 
+# Function to make item selection check dynamic if I decide to add more items
+# to the ITEM_LIST
+def valid_selections():
+    valid_selections_list = []
+    for i in range(len(ITEM_LIST) + 1):
+        if i == 0:
+            continue
+        else:
+            valid_selections_list.append(str(i))
+    return valid_selections_list
 
 MAIN_MENU = """
 Main Menu
@@ -59,15 +67,15 @@ while menu_selection != "4":
         print()
         item_menu()
         item_selection = input(f"\nWhich item would you like to add. "\
-        f"Enter here (1-5 or \'exit\' to return to the Main Menu):\n")
+                               f"Enter 1-5 or 0 to return to the Main Menu:\n")
 
-        if item_selection == "exit":  # Return to main menu
+        if item_selection == "0":  # Return to main menu
                     continue
 
-        while item_selection not in ["1", "2", "3", "4", "5"]:
+        while item_selection not in valid_selections():
             print("*Please enter a valid input*")
             item_selection = input(f"\nWhich item would you like to add. "\
-            f"Enter here (1-5 or \'exit\' to return to the Main Menu):\n")
+                                   f"Enter 1-5 or 0 to return to the Main Menu:\n")
 
         item_selection = int(item_selection) - 1  # Correct indexing
        
@@ -86,16 +94,16 @@ while menu_selection != "4":
         item_menu()
 
         item_remove = input(f"\nWhich item would you like to remove. "\
-        f"Enter here (1-5 or \'exit\' to return to the Main Menu): ")
+                            f"Enter 1-5 or 0 to return to the Main Menu:\n")
 
-        if item_remove == "exit":  # Return to main menu
+        if item_remove == "0":  # Return to main menu
                 continue
 
-        while (item_remove not in ["1", "2", "3", "4", "5"]
+        while (item_remove not in valid_selections()
                and ITEM_LIST[int(item_remove)-1] not in cart_items):
             print("Please enter a valid input")
             item_remove = input(f"\nWhich item would you like to remove. "\
-            f"Enter here (1-5 or \'exit\' to return to the Main Menu): ")
+                                f"Enter 1-5 or 0 to return to the Main Menu:\n")
 
         item_remove = int(item_remove) - 1  # Correct indexing
 
@@ -113,9 +121,14 @@ while menu_selection != "4":
     elif menu_selection == "3":
         print("\nYour cart total: £ {:.2f}".format(cart_total))
         print()
-        checkout_option = input("Would you like to checkout or return to the "\
-                                "main menu?\nEnter \'checkout\' or \'return\': ")
-        if checkout_option == "checkout":
+        checkout_option = input("Enter 1 to checkout or 2 return to the "\
+                                "main menu: ")
+        
+        while checkout_option not in ["1", "2"]:
+             print("Please enter a valid input")
+             checkout_option = input("Enter 1 to checkout or 2 return to the "\
+                                     "main menu: ")
+        if checkout_option == "1":
             break
         else:
             continue
