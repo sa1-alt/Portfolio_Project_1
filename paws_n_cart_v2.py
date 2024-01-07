@@ -16,6 +16,18 @@ def item_menu():
     for num, name in enumerate(ITEM_LIST, start=1):
        print(f"{num}:  {name}")
 
+# Function to add item
+def add_item():
+    cart_items.append(ITEM_LIST[item_selection])
+    cart_prices.append(ITEM_PRICES[item_selection])
+    item_quantity[item_selection] += 1
+
+# function to remove item
+def remove_item():
+    cart_items.remove(ITEM_LIST[item_remove])
+    cart_prices.remove(ITEM_PRICES[item_remove])
+    item_quantity[item_remove] -= 1
+
 # Function to make item selection check dynamic if I decide to add more items
 # to the ITEM_LIST
 def valid_selections():
@@ -83,10 +95,8 @@ while menu_selection != "4":
             item_quantity[item_selection] += 1
             cart_total += ITEM_PRICES[item_selection]
         else:
-            cart_items.append(ITEM_LIST[item_selection])
-            cart_prices.append(ITEM_PRICES[item_selection])
+            add_item()
             cart_total += ITEM_PRICES[item_selection]
-            item_quantity[item_selection] += 1
 
     # Removing an item
     elif menu_selection == "2":
@@ -111,12 +121,9 @@ while menu_selection != "4":
             item_quantity[item_remove] -= 1
             cart_total -= ITEM_PRICES[item_remove]
         else:
-            cart_items.remove(ITEM_LIST[item_remove])
-            cart_prices.remove(ITEM_PRICES[item_remove])
+            remove_item()
             cart_total -= ITEM_PRICES[item_remove]
-            item_quantity[item_remove] -= 1
        
-
     # Displaying total cost of cart items
     elif menu_selection == "3":
         print("\nYour cart total: £ {:.2f}".format(cart_total))
@@ -129,12 +136,15 @@ while menu_selection != "4":
              checkout_option = input("Enter 1 to checkout or 2 return to the "\
                                      "main menu: ")
         if checkout_option == "1":
+            print("Thanks for visiting Paws n Cart!")
             break
         else:
             continue
+else:
+    print("Thanks for visiting Paws n Cart!")
 
         
-# !!! Input error handling !!!      
+
 
                 
 
