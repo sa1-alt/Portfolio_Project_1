@@ -66,6 +66,7 @@ LINE = "-"*79
 print()
 print("Welcome to Paws n Cart!")
 
+# Looping Main Menu until user chooses to checkout
 while menu_selection != "4":
     cart_display()
     menu_selection = input(MAIN_MENU)
@@ -87,7 +88,7 @@ while menu_selection != "4":
         while item_selection not in valid_selections():
             print("*Please enter a valid input*")
             item_selection = input(f"\nWhich item would you like to add. "\
-                                   f"Enter 1-5 or 0 to return to the Main Menu:\n")
+                               f"Enter 1-5 or 0 to return to the Main Menu:\n")
 
         item_selection = int(item_selection) - 1  # Correct indexing
        
@@ -141,7 +142,7 @@ while menu_selection != "4":
         else:
             continue
 else:
-    print("Thanks for visiting Paws n Cart!")
+    print("Thanks for visiting Paws n Cart!\n")
 
         
 
