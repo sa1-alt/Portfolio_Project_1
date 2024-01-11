@@ -48,9 +48,8 @@ Main Menu
 
 Enter your selection here (1-4): """
 
-ITEM_LIST = ["Whiskas Cat Food (7kg)", "Aquarian Goldfish Flake Food (50g)",
-            "Nature's Touch Wild Hay (1kg)", "Mixed Corn for Chickens (20kg)", 
-            "Harrington's Dry Adult Dog Food (15kg)"]
+ITEM_LIST = ["Cat Food", "Goldfish Flakes", "Hamster Hay", "Chicken Corn", 
+            "Dog Food"]
 ITEM_PRICES = [17.50, 5.95, 7.49, 23.49, 34.99]
 
 menu_selection = ""
