@@ -24,8 +24,8 @@ def add_item():
 
 # function to remove item
 def remove_item():
-    cart_items.remove(ITEM_LIST[item_remove])
-    cart_prices.remove(ITEM_PRICES[item_remove])
+    cart_items.pop(int(item_remove)-1)
+    cart_prices.pop(int(item_remove)-1)
     item_quantity[item_remove] -= 1
 
 # Function to make item selection check dynamic if I decide to add more items
@@ -101,19 +101,24 @@ while menu_selection != "4":
     # Removing an item
     elif menu_selection == "2":
         print()
-        item_menu()
+        item_remove_cart = [[str(i+1), cart_items[i]] for i in range(len(cart_items))]
+        print(item_remove_cart)
+        for i in range(len(item_remove_cart)):
+            print(item_remove_cart[i][0], item_remove_cart[i][1], sep=". ")
 
-        item_remove = input(f"\nWhich item would you like to remove. "\
-                            f"Enter 1-5 or 0 to return to the Main Menu:\n")
+        item_remove = input(f"\nEnter the corresponding number of the item "\
+                            f"you would like to remove.\n"
+                            f"Enter 0 to return to the Main Menu:\n")
 
         if item_remove == "0":  # Return to main menu
                 continue
-
-        while (item_remove not in valid_selections()
-               and ITEM_LIST[int(item_remove)-1] not in cart_items):
-            print("Please enter a valid input")
-            item_remove = input(f"\nWhich item would you like to remove. "\
-                                f"Enter 1-5 or 0 to return to the Main Menu:\n")
+        
+        for _ in item_remove_cart:
+            while (item_remove not in _):
+                print("Please enter a valid input")
+                item_remove = input(f"\nEnter the corresponding number of the item "\
+                                    f"you would like to remove.\n"
+                                    f"Enter 0 to return to the Main Menu:\n")
 
         item_remove = int(item_remove) - 1  # Correct indexing
 
